@@ -26,4 +26,4 @@ This generator is a proof of concept implementation, which can generate metamode
 
 ## Previous version
 
-A previous version of this generator and examples of some generated models can be found [http://st.inf.tu-dresden.de/RML/](http://st.inf.tu-dresden.de/RML/).
+A previous version of this generator and examples of some generated models can be found [here](http://st.inf.tu-dresden.de/RML/).
