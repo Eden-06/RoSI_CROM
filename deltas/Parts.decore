@@ -1,0 +1,11 @@
+configuration delta "Parts"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>
+{
+	EClass partEClass = new EClass(name : "Part");
+	addEClass(partEClass, <crom_l1>);
+	
+	EReference rolesEReference = new EReference(eType: <AbstractRole>, name : "roles", lowerBound : 1, upperBound : 1, containment : true);
+	addEReference(rolesEReference, partEClass);
+}

@@ -1,0 +1,18 @@
+configuration delta "OnCompartments"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+	<Parts.decore>
+{
+	EClass compartmentTypeEClass = new EClass(name : "CompartmentType");
+	addEClass(compartmentTypeEClass, <crom_l1>);
+	
+	EReference partsEReference = new EReference(eType: <Part>, name : "parts", lowerBound : 0, upperBound : -1, containment : true, ordered:true);
+	addEReference(partsEReference, compartmentTypeEClass);
+	
+	EReference wholeEReference = new EReference(eType: compartmentTypeEClass, name : "whole", lowerBound : 1, upperBound : 1, containment : false);
+	addEReference(wholeEReference, <Part>);
+
+	makeEReferencesOpposite(partsEReference, wholeEReference);
+	
+}

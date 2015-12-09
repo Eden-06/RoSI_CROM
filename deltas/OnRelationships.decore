@@ -1,0 +1,48 @@
+configuration delta "OnRelationships"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>
+{
+	EPackage ePackage = <crom_l1>;
+	
+	//Create Relationship EClass
+	EClass relationshipEClass = new EClass(name: "Relationship");
+	addEClass(relationshipEClass, ePackage);
+	addESuperType(<Relation>,relationshipEClass);
+	addESuperType(<NamedElement>,relationshipEClass);
+	
+	
+	//Create Parthood EEnum
+	EEnum dirEEnum = new EEnum(name: "Direction");
+	addEEnum(dirEEnum, ePackage);
+	
+	EEnumLiteral undirecteddEEnumLiteral = new EEnumLiteral(name: "Undirected", literal: "Undirected", value: 0);
+	addEEnumLiteral(undirecteddEEnumLiteral, dirEEnum);
+	
+	EEnumLiteral firstToSecondEEnumLiteral = new EEnumLiteral(name: "FirstToSecond", literal: "FirstToSecond", value: 1);
+	addEEnumLiteral(firstToSecondEEnumLiteral, dirEEnum);
+	
+	EEnumLiteral secondToFirstEEnumLiteral = new EEnumLiteral(name: "SecondToFirst", literal: "SecondToFirst", value: 2);
+	addEEnumLiteral(secondToFirstEEnumLiteral, dirEEnum);
+	
+
+	//Create Place EClass
+	EClass placeEClass = new EClass(name: "Place");
+	addEClass(placeEClass, ePackage);
+	
+	EReference holderEReference = new EReference(eType: <RoleType>, name: "holder", lowerBound: 1, upperBound: 1, containment: false);
+	addEReference(holderEReference, placeEClass);
+		
+	//Create EReferences
+	EAttribute partEAttribute = new EAttribute(name: "direction", eType: dirEEnum, lowerBound: 1, upperBound: 1);
+	addEAttribute(partEAttribute, relationshipEClass);
+	
+	EReference firstEReference = new EReference(eType: placeEClass, name: "first", lowerBound: 1, upperBound: 1, containment: true);
+	addEReference(firstEReference, relationshipEClass);
+	
+	EReference secondEReference = new EReference(eType: placeEClass, name: "second", lowerBound: 1, upperBound: 1, containment: true);
+	addEReference(secondEReference, relationshipEClass);
+	
+
+
+}

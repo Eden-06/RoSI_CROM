@@ -1,0 +1,14 @@
+configuration delta "RoleConstraints"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <Constraints.decore>
+{
+	EClass roleConstraintEClass = new EClass(name : "RoleConstraint");
+	addEClass(roleConstraintEClass, <crom_l1>);
+	
+	addESuperType(<Constraint>, roleConstraintEClass);
+	
+	EClass abstractRoleEClass = <AbstractRole>;
+	
+}

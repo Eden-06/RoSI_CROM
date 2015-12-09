@@ -1,0 +1,9 @@
+configuration delta "ContainsCompartmentsAndOnCompartments"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <OnCompartments.decore>
+{
+	EReference containsEReference = new EReference(eType: <CompartmentType>, name: "contains", lowerBound: 1, upperBound: -1, containment: true, ordered: true);
+	addEReference(containsEReference, <CompartmentType>);
+}

@@ -1,0 +1,37 @@
+configuration delta "IntraRelationshipConstraints"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <RelationshipConstraints.decore>,
+			 <OnRelationships.decore>
+{
+	EPackage ePackage = <crom_l1>;
+	
+	
+	EClass intraRelConstraintEClass = new EClass(name : "IntraRelationshipConstraint");
+	addEClass(intraRelConstraintEClass, ePackage);
+	addESuperType(<RelationshipConstraint>, intraRelConstraintEClass);
+	
+	EReference relationEReference = new EReference(eType: <Relationship>, name : "relation", lowerBound : 0, upperBound : 1, containment : false, ordered : true);
+	addEReference(relationEReference, intraRelConstraintEClass);
+	
+	EClass cyclicEClass = new EClass(name : "Cyclic");
+	addEClass(cyclicEClass, ePackage);
+	addESuperType(intraRelConstraintEClass,cyclicEClass);
+
+	EClass totalEClass = new EClass(name : "Total");
+	addEClass(totalEClass, ePackage);
+	addESuperType(intraRelConstraintEClass,totalEClass);
+
+	EClass irreflexiveEClass = new EClass(name : "Irreflexive");
+	addEClass(irreflexiveEClass, ePackage);
+	addESuperType(intraRelConstraintEClass,irreflexiveEClass);
+	
+	EClass acyclicEClass = new EClass(name : "Acyclic");
+	addEClass(acyclicEClass, ePackage);
+	addESuperType(intraRelConstraintEClass,acyclicEClass);
+	
+	EClass reflexiveEClass = new EClass(name : "Reflexive");
+	addEClass(reflexiveEClass, ePackage);
+	addESuperType(intraRelConstraintEClass,reflexiveEClass);
+}

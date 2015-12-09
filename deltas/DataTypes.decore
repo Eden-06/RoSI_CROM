@@ -1,0 +1,12 @@
+configuration delta "DataTypes"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>
+{
+	EClass dataTypeEClass = new EClass(name : "DataType");
+	addEClass(dataTypeEClass, <crom_l1>);
+	
+	//Covered by CompartmentBehaviorFeature
+	addESuperType(<RigidType>, dataTypeEClass);
+	
+}

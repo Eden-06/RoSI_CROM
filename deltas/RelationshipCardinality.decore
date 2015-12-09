@@ -1,0 +1,12 @@
+configuration delta "RelationshipCardinality"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <OnRelationships.decore>
+{
+	EAttribute lowerEAttribute = new EAttribute(name: "lower", eType: <EInt>, lowerBound: 1, upperBound: 1);
+	addEAttribute(lowerEAttribute, <Place>);
+	
+	EAttribute upperEAttribute = new EAttribute(name: "upper", eType: <EInt>, lowerBound: 1, upperBound: 1);
+	addEAttribute(upperEAttribute, <Place>);
+}

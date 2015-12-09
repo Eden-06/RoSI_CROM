@@ -1,0 +1,29 @@
+configuration delta "InterRelationshipConstraints"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <RelationshipConstraints.decore>,
+			 <OnRelationships.decore>
+{
+	
+	
+	EClass interRelationshipConstraint = new EClass(name : "InterRelationshipConstraint");
+	addEClass(interRelationshipConstraint,  <crom_l1>);
+	
+	
+	addESuperType(<RelationshipConstraint>, interRelationshipConstraint);
+	
+	EReference firstEReference = new EReference(eType : <Relationship>, name : "first", lowerBound : 1, upperBound : 1, containment : false, ordered: true);
+	addEReference(firstEReference, interRelationshipConstraint);
+	
+	EReference secondEReference = new EReference(eType : <Relationship>, name : "second", lowerBound : 1, upperBound : 1, containment : false, ordered: true);
+	addEReference(secondEReference, interRelationshipConstraint);	
+
+	EClass relationshipImplicationEClass = new EClass(name : "RelationshipImplication");
+	addEClass(relationshipImplicationEClass,  <crom_l1>);	
+	addESuperType(interRelationshipConstraint, relationshipImplicationEClass);
+	
+	EClass relationshipExclusionEClass = new EClass(name : "RelationshipExclusion");
+	addEClass(relationshipExclusionEClass,  <crom_l1>);	
+	addESuperType(interRelationshipConstraint, relationshipExclusionEClass);
+}

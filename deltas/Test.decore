@@ -1,0 +1,10 @@
+configuration delta "Test"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <Constraints.decore>
+{
+	EClass testEClass = new EClass(name : "Test");
+	addEClass(testEClass, <crom_l1>);
+	addESuperType(<Constraint>, testEClass);
+}

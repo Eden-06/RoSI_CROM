@@ -1,0 +1,13 @@
+configuration delta "OnCompartmentsAndOnRelationships"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <Parts.decore>
+{
+	EAttribute lowerEAttribute = new EAttribute(eType: <EInt>, name : "lower", lowerBound : 1, upperBound : 1);
+	addEAttribute(lowerEAttribute, <Part>);
+	
+	EAttribute upperEAttribute = new EAttribute(eType: <EInt>, name : "upper", lowerBound : 1, upperBound : 1);
+	addEAttribute(upperEAttribute, <Part>);
+	
+}

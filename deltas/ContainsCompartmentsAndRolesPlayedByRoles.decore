@@ -1,0 +1,9 @@
+configuration delta "ContainsCompartmentsAndRolesPlayedByRoles"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+			 <ContainsCompartmentsAndOnCompartments.decore>
+{
+	EReference fulfillmentEReference = new EReference(eType: <Fulfillment>, name: "fulfillments", lowerBound: 0, upperBound: -1, containment: true, ordered: true);
+	addEReference(fulfillmentEReference, <CompartmentType>);
+}

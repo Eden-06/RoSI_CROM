@@ -1,0 +1,35 @@
+configuration delta "GroupConstraints"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>
+{
+	EClass roleGroupEClass = new EClass(name : "RoleGroup");
+	addEClass(roleGroupEClass, <crom_l1>);
+	
+	addESuperType(<AbstractRole>, roleGroupEClass);
+	addESuperType(<RelationTarget>, roleGroupEClass);
+	
+	EAttribute lowerEAttribute = new EAttribute(eType: <EInt>, name : "lower", lowerBound : 1, upperBound : 1);
+	addEAttribute(lowerEAttribute, roleGroupEClass);
+	
+	EAttribute upperEAttribute = new EAttribute(eType: <EInt>, name : "upper", lowerBound : 1, upperBound : 1);
+	addEAttribute(upperEAttribute, roleGroupEClass);
+	
+	
+	EClass roleGroupElementEClass = new EClass(name : "RoleGroupElement", interface : true);
+	setEClassAbstract(true,roleGroupElementEClass);
+	addEClass(roleGroupElementEClass, <crom_l1>);
+	addESuperType(roleGroupElementEClass,<AbstractRole>);
+	
+	EReference elementsEReference = new EReference(eType : roleGroupElementEClass, name : "elements", lowerBound : 0, upperBound : -1, containment: true);
+	addEReference(elementsEReference, roleGroupEClass);
+	
+	EClass abstractRoleRefElementEClass = new EClass(name : "AbstractRoleRef");
+	addEClass(abstractRoleRefElementEClass, <crom_l1>);
+	
+	EReference refEReference = new EReference(eType : <AbstractRole>, name : "ref", lowerBound : 1, upperBound : 1, containment: false);
+	addEReference(refEReference, abstractRoleRefElementEClass);
+	
+	addESuperType(roleGroupElementEClass,abstractRoleRefElementEClass);
+
+}

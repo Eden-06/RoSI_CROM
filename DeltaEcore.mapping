@@ -1,0 +1,129 @@
+// # Mappings for features of Roles
+
+// ## Properties
+
+//Role Properties and Behavior must be set together
+Role_Behavior && Role_Properties :		<deltas/RoleBehaviorAndRoleProperties.decore>
+!(Role_Behavior && Role_Properties) :	<deltas/NotRoleProperties.decore>
+
+// ## Relations
+
+//Roles can be played by ...
+Naturals : 			<deltas/PlayedByObjects.decore>
+Roles :				<deltas/PlayedByRoles.decore>
+
+Role_Inheritance :	<deltas/RoleInheritance.decore>
+
+// ## Constraints
+
+Relationship_Constraints || Role_Constraints :	<deltas/Constraints.decore>
+
+//Role_Constraints is implied by any of the concrete role constraints
+Role_Constraints :		<deltas/RoleConstraints.decore>
+Role_Equivalence :		<deltas/RoleEquivalence.decore>
+Role_Implication :		<deltas/RoleImplication.decore>
+Role_Prohibition :		<deltas/RoleProhibition.decore>
+
+//Occurence constraints require Parts, but not Role_Constraints
+Occurence_Constraints :	<deltas/OccurenceConstraints.decore>
+Group_Constraints :		<deltas/GroupConstraints.decore>
+
+
+
+// # Mappings for features of Relationships
+
+// ## Properties
+
+On_Relationships :	<deltas/OnRelationships.decore>
+
+// ## Relations
+
+// ## Constraints
+
+//Relationship_Constraints is implied by any of the concrete role constraints
+Relationship_Constraints :			<deltas/RelationshipConstraints.decore>
+Inter_Relationship_Constraints :	<deltas/InterRelationshipConstraints.decore>
+Intra_Relationship_Constraints :	<deltas/IntraRelationshipConstraints.decore>
+Parthood_Constraints : 				<deltas/ParthoodConstraints.decore>
+
+Relationship_Cardinality : 			<deltas/RelationshipCardinality.decore>
+
+// # Mappings for features of Compartments
+
+On_Compartments :	<deltas/OnCompartments.decore>
+
+//WARNING: RoleModel is assumed to be missing from base model
+!On_Compartments :	<deltas/NotOnCompartments.decore>
+	
+// ## Properties
+
+//Both configurations must occur together
+Compartment_Behavior && Compartment_Properties && On_Compartments :
+	<deltas/CompartmentBehaviorOrCompartmentProperties.decore>
+!(Compartment_Behavior && Compartment_Properties) && On_Compartments:
+	<deltas/NotCompartmentBehaviorAndNotCompartmentProperties.decore>
+
+Contains_Compartments && On_Compartments :
+	<deltas/ContainsCompartmentsAndOnCompartments.decore>
+//Compartments are allowed to contain compartments and roles played by Roles
+Contains_Compartments && On_Compartments && Roles :
+	<deltas/ContainsCompartmentsAndRolesPlayedByRoles.decore>
+	
+
+// ## Relations
+
+//Roles can be played by ...
+Compartments:	<deltas/PlayedByCompartments.decore>
+
+//Compartment_Inheritance should never occur without On_Compartments 
+Compartment_Inheritance && On_Compartments :
+	<deltas/CompartmentInheritance.decore>
+
+// ## Constraints
+
+On_Relationships && On_Compartments :
+	<deltas/OnCompartmentsAndOnRelationships.decore>
+//(Relationship_Constraints || Role_Constraints)
+(Inter_Relationship_Constraints || Intra_Relationship_Constraints || Parthood_Constraints || Role_Implication || Role_Prohibition || Role_Equivalence) && On_Compartments :	
+	<deltas/ConstraintsAndOnCompartments.decore>
+
+On_Relationships && !On_Compartments :
+	<deltas/NotOnCompartmentsAndOnRelationships.decore>
+//(Relationship_Constraints || Role_Constraints)
+(Inter_Relationship_Constraints || Intra_Relationship_Constraints || Parthood_Constraints || Role_Implication || Role_Prohibition || Role_Equivalence) && !On_Compartments :	
+	<deltas/ConstraintsAndNotOnCompartments.decore>
+
+
+// # Mappings for features of DataTypes
+
+// ## Properties
+
+//Data_Types will always be created with properties and behavior
+Data_Types: 			<deltas/DataTypes.decore>
+
+// ## Relations
+
+Dates:					<deltas/PlayedByDates.decore>
+Data_Type_Inheritance:	<deltas/DataTypeInheritance.decore>
+
+// ## Constraints
+
+
+// # Obsolete Mappings
+
+//(Relationship_Constraints || Role_Constraints) :	<deltas/Test.decore>
+
+(Inter_Relationship_Constraints || Intra_Relationship_Constraints || Parthood_Constraints || Role_Implication || Role_Prohibition || Role_Equivalence) :
+	<deltas/Test.decore>
+
+//mapping dependency is is resolved by the individual dependency
+//Relationship_Constraints || Role_Constraints :	<deltas/Constraints.decore>
+
+//mapping depends on CompartmentType existence
+//Compartment_Inheritance :	<deltas/CompartmentInheritance.decore>
+
+//Player interface now present in minimal model
+//<deltas/NotCompartmentsAndRoles.decore>
+//<deltas/NotCompartmentsAndNotRoles.decore>
+//Compartments && Roles : <deltas/CompartmentsAndRoles.decore>
+//Compartments && !Roles :<deltas/CompartmentsAndNotRoles.decore>

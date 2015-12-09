@@ -1,0 +1,10 @@
+configuration delta "ConstraintsAndNotOnCompartments"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires 	<../model/crom_l1.ecore>,
+				<Constraints.decore>,
+				<NotOnCompartments.decore>
+{
+	EReference constraintsEReference = new EReference(eType : <Constraint>, name : "constraints", lowerBound : 0, upperBound : -1, containment : true, ordered: true);
+	addEReference(constraintsEReference, <RoleModel>);
+}

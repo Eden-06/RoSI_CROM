@@ -1,0 +1,17 @@
+configuration delta "DataInheritance"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires 	<../model/crom_l1.ecore>,
+				<DataTypes.decore>
+{
+	EClass dataInheritanceEClass = new EClass(name : "DataInheritance");
+	addEClass(dataInheritanceEClass, <crom_l1>);
+	
+	addESuperType(<Inheritance>, dataInheritanceEClass);
+	
+	EReference superEReference = new EReference(eType: <DataType>, name : "super", lowerBound : 1, upperBound : 1, containment : false);
+	addEReference(superEReference, dataInheritanceEClass);
+	
+	EReference subEReference = new EReference(eType: <DataType>, name : "sub", lowerBound : 1, upperBound : 1, containment : false);
+	addEReference(subEReference, dataInheritanceEClass);
+}

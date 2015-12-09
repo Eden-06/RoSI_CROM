@@ -1,0 +1,19 @@
+configuration delta "NotOnCompartments"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+	<Parts.decore>
+{
+	EClass rolemodelEClass = new EClass(name : "RoleModel");
+	addEClass(rolemodelEClass, <crom_l1>);
+	
+	addESuperType(<ModelElement>,rolemodelEClass);
+	
+	EReference partsEReference = new EReference(eType: <Part>, name : "parts", lowerBound : 0, upperBound : -1, containment : true, ordered:true);
+	addEReference(partsEReference, rolemodelEClass);
+	
+	EReference wholeEReference = new EReference(eType: rolemodelEClass, name : "whole", lowerBound : 1, upperBound : 1, containment : false);
+	addEReference(wholeEReference, <Part>);
+
+	makeEReferencesOpposite(partsEReference, wholeEReference);
+}

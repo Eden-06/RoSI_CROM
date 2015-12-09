@@ -1,0 +1,39 @@
+configuration delta "ParthoodConstraints"
+
+dialect <http://www.eclipse.org/emf/2002/Ecore>
+	requires <../model/crom_l1.ecore>,
+		<IntraRelationshipConstraints.decore>
+{
+	
+	//Create Parthood EEnum
+	EEnum parthoodEEnum = new EEnum(name: "Parthood");
+	addEEnum(parthoodEEnum, <crom_l1>);
+	
+	EEnumLiteral unconstrainedEEnumLiteral = new EEnumLiteral(name: "Unconstrained", literal: "Unconstrained", value: 0);
+	addEEnumLiteral(unconstrainedEEnumLiteral, parthoodEEnum);
+	
+	EEnumLiteral exclusivePartEEnumLiteral = new EEnumLiteral(name: "ExclusivePart", literal: "ExclusivePart", value: 1);
+	addEEnumLiteral(exclusivePartEEnumLiteral, parthoodEEnum);
+	
+	EEnumLiteral essentialPartEEnumLiteral = new EEnumLiteral(name: "EssentialPart", literal: "EssentialPart", value: 2);
+	addEEnumLiteral(essentialPartEEnumLiteral, parthoodEEnum);
+	
+	EEnumLiteral mandatoryPartEEnumLiteral = new EEnumLiteral(name: "MandatoryPart", literal: "MandatoryPart", value: 3);
+	addEEnumLiteral(mandatoryPartEEnumLiteral, parthoodEEnum);
+	
+	EEnumLiteral inseperablePartEEnumLiteral = new EEnumLiteral(name: "InseparablePart", literal: "InseparablePart", value: 4);
+	addEEnumLiteral(inseperablePartEEnumLiteral, parthoodEEnum);
+	
+	EEnumLiteral shareablePartEEnumLiteral = new EEnumLiteral(name: "ShareablePart", literal: "ShareablePart", value: 5);
+	addEEnumLiteral(shareablePartEEnumLiteral, parthoodEEnum);
+
+
+	//Create Place EClass
+	EClass parthoodEClass = new EClass(name: "ParthoodConstraint");
+	addEClass(parthoodEClass, <crom_l1>);
+	addESuperType(<IntraRelationshipConstraint>,parthoodEClass);
+
+	EAttribute kindEAttribute = new EAttribute(name: "kind", eType: parthoodEEnum, lowerBound: 1, upperBound: 1);
+	addEAttribute(kindEAttribute, parthoodEClass);
+
+}
