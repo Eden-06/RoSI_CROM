@@ -3,7 +3,7 @@
   <rootFeature minCardinality="1" maxCardinality="1" name="RML_Feature_Model">
     <groups minCardinality="1" maxCardinality="4">
       <features minCardinality="1" maxCardinality="1" name="Role_Types">
-        <groups minCardinality="2" maxCardinality="5">
+        <groups minCardinality="3" maxCardinality="5">
           <features maxCardinality="1" name="Role_Structure">
             <groups minCardinality="1" maxCardinality="3">
               <features maxCardinality="1" name="Role_Properties"/>
@@ -40,13 +40,14 @@
               <features maxCardinality="1" name="On_Relationships"/>
             </groups>
           </features>
-          <features maxCardinality="1" name="Role_Constraints">
-            <groups minCardinality="1" maxCardinality="5">
+          <features minCardinality="1" maxCardinality="1" name="Role_Constraints">
+            <groups minCardinality="1" maxCardinality="6">
               <features maxCardinality="1" name="Role_Implication"/>
               <features maxCardinality="1" name="Role_Prohibition"/>
               <features maxCardinality="1" name="Role_Equivalence"/>
               <features maxCardinality="1" name="Group_Constraints"/>
               <features maxCardinality="1" name="Occurence_Constraints"/>
+              <features maxCardinality="1" name="Occurrence_Constraints"/>
             </groups>
           </features>
           <features minCardinality="1" maxCardinality="1" name="Role_Identity">
